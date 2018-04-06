@@ -220,6 +220,10 @@ class SonataUserExtension extends Extension implements PrependExtensionInterface
      */
     public function registerDoctrineMapping(array $config): void
     {
+        if (isset($config['relation']['user_group']) && false === $config['relation']['user_group']) {
+            return;
+        }
+
         foreach ($config['class'] as $type => $class) {
             if (!class_exists($class)) {
                 return;
